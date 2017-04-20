@@ -17,6 +17,10 @@ var Claim = function () {
   // ***********************************************************
   // DO NOT CHANGE THE BOTTOM UNLESS YOU KNOW WHAT YOU ARE DOING
   // ***********************************************************
+  
+  var currentHoursClaimedMessage = 'Current hours claimed: ';
+  var proposedClaimHoursMessage = 'Proposed hours: ';
+  var claimObjectCreateSuccessMessage = 'Claim object successfully created. Run c.makeAllClaims() to start.';
 
   var ACTIVITY_DICT = {};
   // IMPORTANT: Not all categories may be availale for your module!!
@@ -117,9 +121,9 @@ var Claim = function () {
     });
 
     this.ajax_index = 0; // index to keep track of the current ajax call
-    console.debug('Current hours claimed: ' + this.existing_hours);
-    console.debug('Proposed hours: ' + this.proposed_hours);
-    console.debug('Claim object successfully created. Run c.makeAllClaims() to start.');
+    console.debug(currentHoursClaimedMessage + this.existing_hours);
+    console.debug(proposedClaimHoursMessage + this.proposed_hours);
+    console.debug(claimObjectCreateSuccessMessage);
   }
 
   Claim.ASSIGNMENT_MARKING = ASSIGNMENT_MARKING;
