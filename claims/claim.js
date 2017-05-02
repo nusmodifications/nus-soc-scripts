@@ -44,6 +44,9 @@ var Claim = function () {
     this.error = false;
     this.proposed_hours = 0;
     this.existing_hours = 0;
+    for (var attr in config.additional_activities) {
+      ACTIVITY_DICT[attr] = config.additional_activities[attr];
+    }
 
     var that = this;
 
