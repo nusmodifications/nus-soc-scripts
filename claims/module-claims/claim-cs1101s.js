@@ -37,7 +37,7 @@ var config = {
   duties: {
     'Assignment Marking': 'Graded students\' assignments',
     'Course Material Preparation': 'Prepared assignments',
-    'Tutorial': 'Conducted tutorial',
+    'Tutorial': 'Conducted Tutorial ' + prompt("Your DG Number (e.g. 9)"),
     'Consultation with students': 'Consultation',
     'Midterm Marking': 'Graded midterm test',
     'Project Evaluation': 'Evaluated programming contest',
@@ -48,8 +48,8 @@ var config = {
   activities_list_fn: function () {
     var activities_list = [];
 
-    // Assignment marking: 22 - 2 hr x 11 weeks
-    // Consultation with students: 10 - 2 hrs x 5 weeks
+    // Assignment marking: 11 - 1 hr x 11 weeks
+    // Consultation with students: 21 - 3 hrs x 7 weeks
     // Course material preparation: 6
     // Midterm marking: 3
     // Project evaluation: 2 (let's say this is the contests)
@@ -63,16 +63,16 @@ var config = {
           week: week,
           day: 'SATURDAY',
           start_time: '1300',
-          end_time: '1500'
+          end_time: '1400'
         });
       }
-      if (week > 8 && week <= 13) {
+      if (week % 2 == 0 || week == 13) {
         activities_list.push({
           activity_type: Claim.CONSULTATION,
           week: week,
           day: 'SATURDAY',
-          start_time: '1600',
-          end_time: '1800'
+          start_time: '1400',
+          end_time: '1700'
         });
       }
 
