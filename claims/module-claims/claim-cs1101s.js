@@ -31,7 +31,7 @@ var config = {
   // Format: YYYY/MM/DD
   // Note: Month is from 0-11, Date is from 1-31
   // This should be the semester's week 1. For AY15/16 Sem 1, it's Monday, Aug 10
-  first_day_of_sem: new Date(2016, 08, 08),
+  first_day_of_sem: new Date(2017, 08, 15),
   // In case you want to customize the duties field for each activity
   // Do not modify the keys
   duties: {
@@ -48,8 +48,8 @@ var config = {
   activities_list_fn: function () {
     var activities_list = [];
 
-    // Assignment marking: 11 - 1 hr x 11 weeks
-    // Consultation with students: 21 - 3 hrs x 7 weeks
+    // Assignment marking: 22 - 2 hr x 11 weeks
+    // Consultation with students: 10 - 2 hrs x 5 weeks
     // Course material preparation: 6
     // Midterm marking: 3
     // Project evaluation: 2 (let's say this is the contests)
@@ -63,16 +63,16 @@ var config = {
           week: week,
           day: 'SATURDAY',
           start_time: '1300',
-          end_time: '1400'
+          end_time: '1500'
         });
       }
-      if (week % 2 == 0 || week == 13) {
+      if (week > 8 && week <= 13) {
         activities_list.push({
           activity_type: Claim.CONSULTATION,
           week: week,
           day: 'SATURDAY',
-          start_time: '1400',
-          end_time: '1700'
+          start_time: '1600',
+          end_time: '1800'
         });
       }
 
