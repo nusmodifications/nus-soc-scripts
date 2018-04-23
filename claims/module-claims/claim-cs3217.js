@@ -46,8 +46,8 @@ var config = {
     const ps_weeks = [2, 4, 6, 8, 10];
     const ps_rates = [1, 1, 1.5, 1.5, 2];   // Hrs per submission
 
-    // FILL THIS IN
-    const ps_students = [0, 0, 0, 0, 0];    // No. of students
+    // ATTENTION: FILL THIS IN
+    const ps_students = [0, 0, 0, 0, 0];    // No. of students per PS
 
     // Great big hack that might just happen to work without importing a time library
     function make_time(hrs) {
