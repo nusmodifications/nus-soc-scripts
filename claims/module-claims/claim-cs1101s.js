@@ -50,9 +50,26 @@ function promptAndParse(msg) {
   }
   return parsed;
 }
+
+function studio_slot(code) {
+  let index = parseInt(code.match(/[0-9]+/)[0]) - 1;
+  let times = ["0800", "1000", "1200", "1400", "1600", "1800"];
+  let result = {
+    day: index < 5 ? "MONDAY" : "TUESDAY",
+    start_time: times[index % 5],
+    end_time: times[1 + (index % 5)]
+  };
+  console.log(`Detected studio slot ${index + 1}`);
+  console.log(result);
+  return result;
+}
+
+var studio_number = prompt("What is your Studio Code? (e.g. 01E)");
+var studio_time = studio_slot(studio_number);
+
 var config = {
   // Your NUSSTU ID, such as a0012345
-  student_id: prompt('Your NUSSTU ID, such as a0012345'),
+  student_id: prompt('Your NUSSTU ID, such as e0012345'),
   // Module you are claiming hours for, such as CS1101S
   module: 'CS1101S',
   // Format: YYYY/MM/DD
@@ -64,7 +81,7 @@ var config = {
   duties: {
     'Assignment Marking': 'Graded students\' assignments',
     'Course Material Preparation': 'Prepared for studios and assignments',
-    'Tutorial': 'Conducted Tutorial ' + prompt("Your DG Number (e.g. 01E)"),
+    'Tutorial': 'Conducted Tutorial ' + studio_number,
     'Consultation with students': 'Consultation',
     // 'Midterm Marking': 'Graded midterm test',
     // 'Project Evaluation': 'Evaluated programming contest',
@@ -81,6 +98,7 @@ var config = {
     //  3h environment model mission
     // Consultation with students: 12 = 1 hrs x 12 weeks
     // Studio preparation: 12 = 1hrs x 12 weeks
+    // Studio: 24 = 2 x 12 weeks
     // Baseline: 11 + 12 + 12 = 59
 
     // === Variable Amount===
@@ -127,17 +145,15 @@ var config = {
           activities_list.push({
             activity_type: Claim.CONSULTATION,
             week: week,
-            day: 'TUESDAY',
+            day: 'WEDNESDAY',
             start_time: '1000',
             end_time: `1${consultation_hours_division[week - 2]}00`,
           });
         }
         activities_list.push({
+          ...studio_time,
           activity_type: Claim.TUTORIAL,
           week: week,
-          day: 'MONDAY',
-          start_time: '1600',
-          end_time: '1800'
         });
       }
 
