@@ -95,7 +95,7 @@ var config = {
     // Mission authoring
     var mission_hours = 12 + promptAndParse("How many hours did you spend preparing missions?");
     // Consultation
-    var consultation_hours = promptAndParse("How many hours of consultation did you give? ")
+    var consultation_hours = 12 + promptAndParse("How many hours of consultation did you give? ")
 
     var grading_hours_division = split_hours(grading_hours, 12);
     var mission_hours_division = split_hours(mission_hours, 13);
