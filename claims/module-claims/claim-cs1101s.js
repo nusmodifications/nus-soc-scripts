@@ -102,34 +102,34 @@ var config = {
     var consultation_hours_division = split_hours(consultation_hours, 12);
 
     for (var week = 1; week <= 13; week++) {
-      if (mission_hours_division[week] > 0) {
+      if (mission_hours_division[week - 1] > 0) {
         activities_list.push({
           activity_type: Claim.COURSE_MATERIAL_PREPARATION,
           week: week,
           day: 'SUNDAY',
           start_time: '1000',
-          end_time: `1${mission_hours_division[week]}00`,
+          end_time: `1${mission_hours_division[week - 1]}00`,
         });
       }
 
       if (week > 1) {
         // Only have grading and consultations for 12 weeks
-        if (grading_hours_division[week - 1] > 0) {
+        if (grading_hours_division[week - 2] > 0) {
           activities_list.push({
             activity_type: Claim.ASSIGNMENT_MARKING,
             week: week,
             day: 'SATURDAY',
             start_time: '1000',
-            end_time: `1${grading_hours_division[week - 1]}00`,
+            end_time: `1${grading_hours_division[week - 2]}00`,
           });
         }
-        if (consultation_hours_division[week - 1] > 0) {
+        if (consultation_hours_division[week - 2] > 0) {
           activities_list.push({
             activity_type: Claim.CONSULTATION,
             week: week,
             day: 'TUESDAY',
             start_time: '1000',
-            end_time: `1${consultation_hours_division[week - 1]}00`,
+            end_time: `1${consultation_hours_division[week - 2]}00`,
           });
         }
         activities_list.push({
