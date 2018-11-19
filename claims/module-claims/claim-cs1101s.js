@@ -58,7 +58,7 @@ var config = {
   // Format: YYYY/MM/DD
   // Note: Month is from 0-11, Date is from 1-31
   // This should be the semester's week 1. For AY15/16 Sem 1, it's Monday, Aug 10
-  first_day_of_sem: new Date(2018, 08, 13),
+  first_day_of_sem: new Date(2018, 07, 13),
   // In case you want to customize the duties field for each activity
   // Do not modify the keys
   duties: {
