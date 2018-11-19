@@ -13,7 +13,7 @@
 
 // 5. Run the function c.makeAllClaims() . Wait until the alert 'All claims made!' is shown, then press 'OK'.
 
-// 6. You will be brought back to the previous page. Click on the button 'Claim' again and verify that you have the right number of hours.
+// 6. You will be brought back to the previous page. Click on the button 'Claim' again and verify that you have 17 * NUMBER OF SLOTS hours in total.
 
 // To delete all claims on the page, run the function c.deleteAllClaims()
 
@@ -22,57 +22,86 @@
 // CONFIGURE THE RELEVANT PROPERTIES IN THE CONFIG OBJECT
 // ***********************************************************
 
-if (typeof STUDENT_ID == 'undefined') {
-  STUDENT_ID = null;
-}
-
 var config = {
   // Your NUSSTU ID, such as a0012345
-   student_id: STUDENT_ID,
+  student_id: prompt('Your NUSSTU ID, such as a0012345'),
   // Module you are claiming hours for, such as CS1101S
-  module: 'CS3216',
+  module: 'CS2010',
   // Format: YYYY/MM/DD
   // Note: Month is from 0-11, Date is from 1-31
-  // This should be the semester's week 1. For AY15/16 Sem 1, it's Monday, Aug 10
-  first_day_of_sem: new Date(2017, 7, 14),
+  // This should be the semester's week 1. For AY14/15 Sem 1, it's Monday, Aug 12
+  first_day_of_sem: new Date(2018, 0, 15),
   // In case you want to customize the duties field for each activity
   // Do not modify the keys
   duties: {
-    'Assignment Marking': 'Graded CS3216 assignments',
-    'Course Material Preparation': 'Prepared course materials',
-    'Tutorial': 'Conducted workshop'
+    'Tutorial': 'Conducted Tutorial Sessions',
+    'Consultation with students': 'Conducted Consultation sessions before written quizzes.'
   },
 
   // The following function should return a list of claim objects that you want to make
   activities_list_fn: function () {
     var activities_list = [];
 
-    // 2017: 24 hours of assignment marking and 6 hours of course material preparation!
-
-    for (var week = 4; week <= 10; week+=2) {
+    // Weekly tutorial session 1 
+    for (var week = 3; week <= 13; week++) {
       activities_list.push({
-        activity_type: Claim.ASSIGNMENT_MARKING,
+        activity_type: Claim.TUTORIAL,
         week: week,
-        day: 'FRIDAY',
-        start_time: '1700',
-        end_time: '1900'
-      });
-      activities_list.push({
-        activity_type: Claim.ASSIGNMENT_MARKING,
-        week: week,
-        day: 'SUNDAY',
-        start_time: '1500',
-        end_time: '1900'
+        day: 'WEDNESDAY',
+        start_time: '1200',
+        end_time: '1300'
       });
     }
+
+    // Weekly tutorial session 2 
+    for (var week = 3; week <= 13; week++) {
+      activities_list.push({
+        activity_type: Claim.TUTORIAL,
+        week: week,
+        day: 'WEDNESDAY',
+        start_time: '1300',
+        end_time: '1400'
+      });
+    }
+
+    // 6 hours consultation per tutorial slot
     
+    // Consultation 1
     activities_list.push({
-      activity_type: Claim.COURSE_MATERIAL_PREPARATION,  // Now called "Course Material Creation".
-      week: 1,
+      activity_type: Claim.CONSULTATION,
+      week: 5,
+      day: 'TUESDAY',
+      start_time: '1200',
+      end_time: '1400'
+    });
+    
+    // Consultation 2
+    activities_list.push({
+      activity_type: Claim.CONSULTATION,
+      week: 9,
+      day: 'SUNDAY',
+      start_time: '1400',
+      end_time: '1800'
+    });
+    
+    // Consultation 3
+    activities_list.push({
+      activity_type: Claim.CONSULTATION,
+      week: 11,
+      day: 'THURSDAY',
+      start_time: '1400',
+      end_time: '1700'
+    });
+    
+    // Consultation 4
+    activities_list.push({
+      activity_type: Claim.CONSULTATION,
+      week: 10,
       day: 'MONDAY',
-      start_time: '0900',
+      start_time: '1200',
       end_time: '1500'
     });
+    
 
     return activities_list;
   }
@@ -82,19 +111,15 @@ var config = {
 // DO NOT CHANGE THE BOTTOM UNLESS YOU KNOW WHAT YOU ARE DOING
 // ***********************************************************
 
-if (!STUDENT_ID) {  // Chrome does not allow window.prompt() to run on an inactive tab.
-  alert('Please modify STUDENT_ID in the code, or run STUDENT_ID="a0123456" before pasting and running the code.');
-} else {
-  var core_script = 'https://rawgit.com/nusmodifications/nus-scripts/master/claims/claim.js';
-  var c = undefined;
-  $.getScript(core_script)
-    .done(function () {
-      c = new Claim(config);
-    })
-    .fail(function (jqxhr, settings, exception ) {
-      console.warn('Error loading script');
-      console.warn(jqxhr);
-      console.warn(exception);
-    });
-  // c.makeAllClaims();  // Run this after successful pasting of code! :)
-}
+var core_script = 'https://rawgit.com/nusmodifications/nus-scripts/master/claims/claim.js';
+var c = undefined;
+$.getScript(core_script)
+  .done(function () {
+    c = new Claim(config);
+  })
+  .fail(function (jqxhr, settings, exception) {
+    console.warn('Error loading script');
+    console.warn(jqxhr);
+    console.warn(exception);
+  });
+// c.makeAllClaims();
