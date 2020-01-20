@@ -15,6 +15,9 @@ A collection of scripts to make the life of NUS students easier and better.
 - **IVLE Photos / Know Your Classmates** (No longer functional)
   - IVLE doesn't show the photos of your classmates.
   - This script will let you see the photos of your classmates in SoC modules.
+- **Google Scripts**
+  - Useful scripts powered by [Google Apps Script](https://www.google.com/script/start/)
+  - These scripts will send your personal notification about module, singtel and so on.
 
 ### Contributors
 
@@ -32,3 +35,4 @@ Many thanks to the following people who have contributed to these scripts in one
 - Rey Neo [(https://github.com/reyy)](https://github.com/reyy)
 - Louie Tan [(https://github.com/louietyj)](https://github.com/louietyj)
 - Yuan Yuchuan [(https://github.com/yyc)](https://github.com/yyc)
+- Wang Yifan [(https://github.com/NavePnow)](https://github.com/NavePnow)
